@@ -1,11 +1,11 @@
 package com.mycompany.jasa.view;
 
-import com.mycompany.jasa.dao.UserDAO;
+import com.mycompany.jasa.controller.ControllerException;
+import com.mycompany.jasa.controller.UserController;
 import com.mycompany.jasa.model.User;
-import com.mycompany.jasa.model.User.Role;
+import com.mycompany.jasa.model.Role;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class AdminDashboardFrame extends JFrame {
 
     private final User admin;
-    private final UserDAO userDAO = new UserDAO();
+    private final UserController userController = new UserController();
     private final DefaultTableModel tableModel = new DefaultTableModel(
             new Object[]{"ID", "Nama", "Email", "No. Telepon", "Role"}, 0) {
         @Override public boolean isCellEditable(int row, int column) { return false; }
@@ -70,13 +70,13 @@ public class AdminDashboardFrame extends JFrame {
 
     private void refreshUsers() {
         try {
-            List<User> users = userDAO.findAll(admin.getIdUser());
+            List<User> users = userController.listUsers(admin);
             tableModel.setRowCount(0);
             for (User user : users) {
                 tableModel.addRow(new Object[]{user.getIdUser(), user.getNama(), user.getEmail(),
                         user.getNoTelepon(), user.getRole().getDatabaseValue()});
             }
-        } catch (SQLException | SecurityException exception) {
+        } catch (ControllerException exception) {
             showError("Gagal memuat daftar user", exception);
         }
     }
@@ -93,11 +93,11 @@ public class AdminDashboardFrame extends JFrame {
                 != JOptionPane.OK_OPTION) return;
         char[] rawPassword = password.getPassword();
         try {
-            userDAO.createUserByAdmin(admin.getIdUser(), name.getText(), email.getText(), rawPassword,
+            userController.createManagedUser(admin, name.getText(), email.getText(), rawPassword,
                     phone.getText(), (Role) role.getSelectedItem());
             refreshUsers();
             JOptionPane.showMessageDialog(this, "Akun berhasil ditambahkan.");
-        } catch (SQLException | IllegalArgumentException | SecurityException exception) {
+        } catch (ControllerException exception) {
             showError("Gagal menambahkan akun", exception);
         } finally {
             java.util.Arrays.fill(rawPassword, '\0');
@@ -122,10 +122,10 @@ public class AdminDashboardFrame extends JFrame {
         if (JOptionPane.showConfirmDialog(this, fields, "Edit user", JOptionPane.OK_CANCEL_OPTION)
                 != JOptionPane.OK_OPTION) return;
         try {
-            userDAO.updateUserByAdmin(admin.getIdUser(), id, name.getText(), email.getText(),
+            userController.updateManagedUser(admin, id, name.getText(), email.getText(),
                     phone.getText(), (Role) role.getSelectedItem());
             refreshUsers();
-        } catch (SQLException | IllegalArgumentException | SecurityException exception) {
+        } catch (ControllerException exception) {
             showError("Gagal mengubah user", exception);
         }
     }
@@ -143,9 +143,9 @@ public class AdminDashboardFrame extends JFrame {
                 "Konfirmasi hapus", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (answer != JOptionPane.YES_OPTION) return;
         try {
-            userDAO.deleteUser(admin.getIdUser(), id);
+            userController.deleteManagedUser(admin, id);
             refreshUsers();
-        } catch (SQLException | IllegalArgumentException | SecurityException exception) {
+        } catch (ControllerException exception) {
             showError("Gagal menghapus user", exception);
         }
     }

@@ -1,9 +1,9 @@
 package com.mycompany.jasa.view;
 
-import com.mycompany.jasa.dao.UserDAO;
+import com.mycompany.jasa.controller.AuthController;
+import com.mycompany.jasa.controller.ControllerException;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class RegisterFrame extends JFrame {
 
-    private final UserDAO userDAO = new UserDAO();
+    private final AuthController authController = new AuthController();
     private final JTextField namaField = new JTextField(22);
     private final JTextField emailField = new JTextField(22);
     private final JPasswordField passwordField = new JPasswordField(22);
@@ -53,11 +53,11 @@ public class RegisterFrame extends JFrame {
     private void register() {
         char[] password = passwordField.getPassword();
         try {
-            userDAO.registerCustomer(namaField.getText(), emailField.getText(), password,
+            authController.registerCustomer(namaField.getText(), emailField.getText(), password,
                     teleponField.getText());
             JOptionPane.showMessageDialog(this, "Akun Pelanggan berhasil dibuat. Silakan login.");
             backToLogin();
-        } catch (SQLException | IllegalArgumentException exception) {
+        } catch (ControllerException exception) {
             JOptionPane.showMessageDialog(this, "Registrasi gagal: " + exception.getMessage(),
                     "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } finally {
