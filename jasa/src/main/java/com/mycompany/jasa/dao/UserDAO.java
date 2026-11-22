@@ -70,12 +70,6 @@ public class UserDAO {
         }
     }
 
-    /** Hanya admin yang sudah login yang dapat membuat akun Driver. */
-    public User createDriver(int adminId, String nama, String email, char[] password,
-            String noTelepon) throws SQLException {
-        return createUserByAdmin(adminId, nama, email, password, noTelepon, Role.DRIVER);
-    }
-
     /** Admin dapat membuat akun Driver atau Admin; Pelanggan mendaftar melalui registrasi publik. */
     public User createUserByAdmin(int adminId, String nama, String email, char[] password,
             String noTelepon, Role role) throws SQLException {
