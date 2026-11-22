@@ -1,0 +1,5 @@
+# Salin file ini menjadi db.properties di root project jasa.
+# Isi kredensial aktual secara lokal; db.properties tidak boleh dikomit.
+db.url=
+db.user=
+db.password=
