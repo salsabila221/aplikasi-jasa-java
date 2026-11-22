@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `pesanan` (
         FOREIGN KEY (`id_driver`) REFERENCES `users` (`id_user`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Akun Admin awal. Password memakai format PBKDF2 yang dibaca UserDAO.
+-- Akun Admin awal. Password memakai format PBKDF2 yang diverifikasi AuthController.
 INSERT INTO `users` (`nama`, `email`, `password`, `no_telepon`, `role`)
 SELECT 'Admin JSBJ', 'admin@jsbj.local',
        'pbkdf2-sha256$210000$5pytC0yZBorHcUzg65wQKQ==$XwLj1O3cA+dQKMTrYBBi9e7oGYc/0NTsAv4gwQlv23g=',

@@ -22,7 +22,15 @@ Salsabila mengerjakan fitur autentikasi, profil, serta manajemen pengguna. Jilan
 
 ## Struktur dan skema utama
 
-Project Maven berada di folder `jasa/`. Source Java berada di `jasa/src/main/java/com/mycompany/jasa/`, dalam package `config`, `dao`, `model`, dan `view`.
+Project Maven berada di folder `jasa/`. Source Java berada di `jasa/src/main/java/com/mycompany/jasa/` dan mengikuti pemisahan MVC:
+
+- `model`: objek domain (`User`, `Role`, dan `UserCredential`) berisi data serta accessor.
+- `view`: form dan dashboard Swing; menangani tampilan, input, event, dan pesan kepada pengguna.
+- `controller`: validasi input, aturan role/hak akses, alur autentikasi, registrasi, profil, dan manajemen akun.
+- `dao`: query JDBC untuk membaca dan mengubah data database, tanpa aturan UI.
+- `config`: pembacaan `db.properties` dan pembuatan koneksi database.
+
+Alur utamanya adalah `View -> Controller -> DAO -> Model`; hasilnya dikembalikan melalui controller ke View. View tidak memanggil DAO atau JDBC secara langsung.
 
 Skema database tunggal yang dipakai aplikasi adalah:
 
@@ -43,7 +51,7 @@ Akun Admin awal:
 - Email: `admin@jsbj.local`
 - Password: `JsbjAdmin#2026`
 
-Hash password pada SQL memakai format PBKDF2 yang sama dengan `UserDAO`. Registrasi mandiri hanya untuk Pelanggan; Admin membuat akun Driver atau Admin melalui dashboard.
+Hash password pada SQL memakai format PBKDF2 yang sama dengan verifikasi di `AuthController`. Registrasi mandiri hanya untuk Pelanggan; Admin membuat akun Driver atau Admin melalui dashboard.
 
 ## Konfigurasi koneksi database
 

@@ -1,11 +1,10 @@
 package com.mycompany.jasa.view;
 
-import com.mycompany.jasa.dao.UserDAO;
+import com.mycompany.jasa.controller.AuthController;
+import com.mycompany.jasa.controller.ControllerException;
 import com.mycompany.jasa.model.User;
-import com.mycompany.jasa.model.User.Role;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +17,7 @@ import javax.swing.SwingUtilities;
 
 public class LoginFrame extends JFrame {
 
-    private final UserDAO userDAO = new UserDAO();
+    private final AuthController authController = new AuthController();
     private final JTextField emailField = new JTextField(22);
     private final JPasswordField passwordField = new JPasswordField(22);
 
@@ -56,7 +55,7 @@ public class LoginFrame extends JFrame {
     private void login() {
         char[] password = passwordField.getPassword();
         try {
-            User user = userDAO.login(emailField.getText(), password);
+            User user = authController.login(emailField.getText(), password);
             if (user == null) {
                 JOptionPane.showMessageDialog(this, "Email atau password tidak cocok.",
                         "Login gagal", JOptionPane.WARNING_MESSAGE);
@@ -64,14 +63,12 @@ public class LoginFrame extends JFrame {
                 return;
             }
             dispose();
-            if (user.getRole() == Role.ADMIN) {
-                new AdminDashboardFrame(user).setVisible(true);
-            } else if (user.getRole() == Role.PELANGGAN) {
-                new PelangganDashboardFrame(user).setVisible(true);
-            } else if (user.getRole() == Role.DRIVER) {
-                new DriverDashboardFrame(user).setVisible(true);
+            switch (authController.destinationFor(user)) {
+                case ADMIN -> new AdminDashboardFrame(user).setVisible(true);
+                case PELANGGAN -> new PelangganDashboardFrame(user).setVisible(true);
+                case DRIVER -> new DriverDashboardFrame(user).setVisible(true);
             }
-        } catch (SQLException | IllegalArgumentException exception) {
+        } catch (ControllerException exception) {
             JOptionPane.showMessageDialog(this, "Login gagal: " + exception.getMessage(),
                     "Kesalahan", JOptionPane.ERROR_MESSAGE);
         } finally {
