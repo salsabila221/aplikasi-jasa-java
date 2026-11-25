@@ -105,10 +105,14 @@ public class UserDAO {
     }
 
     public boolean delete(int idUser) throws SQLException {
-        String sql = "DELETE FROM users WHERE id_user = ?";
+        // Keep transaction history intact; accounts with orders must be disabled/retained manually.
+        String sql = "DELETE FROM users WHERE id_user = ? AND NOT EXISTS "
+                + "(SELECT 1 FROM pesanan WHERE id_user = ? OR id_driver = ?)";
         try (Connection connection = KoneksiDB.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idUser);
+            statement.setInt(2, idUser);
+            statement.setInt(3, idUser);
             return statement.executeUpdate() == 1;
         }
     }

@@ -36,7 +36,9 @@ final class ControllerSupport {
     }
 
     static String validPhone(String phone) {
-        if (phone == null || phone.isBlank()) return null;
+        if (phone == null || phone.isBlank()) {
+            throw new ControllerException("Nomor telepon/WhatsApp wajib diisi.");
+        }
         String normalized = phone.trim();
         if (normalized.length() > 15) {
             throw new ControllerException("Nomor telepon maksimal 15 karakter.");

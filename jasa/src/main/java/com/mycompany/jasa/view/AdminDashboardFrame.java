@@ -39,6 +39,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         refreshButton = new javax.swing.JButton();
         umkmButton = new javax.swing.JButton();
         transactionsButton = new javax.swing.JButton();
+        profileButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         tableScrollPane = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
@@ -47,12 +48,12 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         setTitle("Dashboard Admin - JSBJ");
         setResizable(false);
 
+        titleLabel.setBackground(new java.awt.Color(39, 61, 83));
         titleLabel.setFont(new java.awt.Font("Georgia", 1, 25)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        titleLabel.setBackground(new java.awt.Color(39, 61, 83));
-        titleLabel.setOpaque(true);
-        titleLabel.setText("Dashboard Admin");
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Dashboard Admin");
+        titleLabel.setOpaque(true);
 
         subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
         subtitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -61,53 +62,60 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         subtitleLabel.setText("Kelola akun dan akses pengguna JSBJ.");
         subtitleLabel.setOpaque(true);
 
+        addButton.setBackground(new java.awt.Color(54, 132, 142));
         addButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setBackground(new java.awt.Color(54, 132, 142));
-        addButton.setOpaque(true);
         addButton.setText("Tambah Driver / Admin");
+        addButton.setOpaque(true);
         addButton.addActionListener(this::addButtonActionPerformed);
 
+        editButton.setBackground(new java.awt.Color(232, 238, 243));
         editButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         editButton.setForeground(new java.awt.Color(39, 61, 83));
-        editButton.setBackground(new java.awt.Color(232, 238, 243));
-        editButton.setOpaque(true);
         editButton.setText("Edit User");
+        editButton.setOpaque(true);
         editButton.addActionListener(this::editButtonActionPerformed);
 
+        deleteButton.setBackground(new java.awt.Color(232, 238, 243));
         deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(39, 61, 83));
-        deleteButton.setBackground(new java.awt.Color(232, 238, 243));
-        deleteButton.setOpaque(true);
         deleteButton.setText("Hapus User");
+        deleteButton.setOpaque(true);
         deleteButton.addActionListener(this::deleteButtonActionPerformed);
 
+        refreshButton.setBackground(new java.awt.Color(232, 238, 243));
         refreshButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         refreshButton.setForeground(new java.awt.Color(39, 61, 83));
-        refreshButton.setBackground(new java.awt.Color(232, 238, 243));
-        refreshButton.setOpaque(true);
         refreshButton.setText("Muat Ulang");
+        refreshButton.setOpaque(true);
         refreshButton.addActionListener(this::refreshButtonActionPerformed);
 
+        umkmButton.setBackground(new java.awt.Color(232, 238, 243));
         umkmButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         umkmButton.setForeground(new java.awt.Color(39, 61, 83));
-        umkmButton.setBackground(new java.awt.Color(232, 238, 243));
-        umkmButton.setOpaque(true);
         umkmButton.setText("Kelola UMKM");
+        umkmButton.setOpaque(true);
         umkmButton.addActionListener(this::umkmButtonActionPerformed);
 
+        transactionsButton.setBackground(new java.awt.Color(232, 238, 243));
         transactionsButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         transactionsButton.setForeground(new java.awt.Color(39, 61, 83));
-        transactionsButton.setBackground(new java.awt.Color(232, 238, 243));
-        transactionsButton.setOpaque(true);
         transactionsButton.setText("Monitoring Transaksi");
+        transactionsButton.setOpaque(true);
         transactionsButton.addActionListener(this::transactionsButtonActionPerformed);
 
+        profileButton.setBackground(new java.awt.Color(232, 238, 243));
+        profileButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        profileButton.setForeground(new java.awt.Color(39, 61, 83));
+        profileButton.setText("Profil");
+        profileButton.setOpaque(true);
+        profileButton.addActionListener(this::profileButtonActionPerformed);
+
+        logoutButton.setBackground(new java.awt.Color(232, 238, 243));
         logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(39, 61, 83));
-        logoutButton.setBackground(new java.awt.Color(232, 238, 243));
-        logoutButton.setOpaque(true);
         logoutButton.setText("Logout");
+        logoutButton.setOpaque(true);
         logoutButton.addActionListener(this::logoutButtonActionPerformed);
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,26 +147,29 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(subtitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(tableScrollPane)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(umkmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(transactionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +185,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
                     .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(umkmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transactionsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -225,7 +237,8 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
         int id = ((Number) tableModel.getValueAt(row, 0)).intValue();
         JTextField name = new JTextField(String.valueOf(tableModel.getValueAt(row, 1)));
         JTextField email = new JTextField(String.valueOf(tableModel.getValueAt(row, 2)));
-        JTextField phone = new JTextField(String.valueOf(tableModel.getValueAt(row, 3)));
+        Object phoneValue = tableModel.getValueAt(row, 3);
+        JTextField phone = new JTextField(phoneValue == null ? "" : String.valueOf(phoneValue));
         JComboBox<Role> role = new JComboBox<>(Role.values());
         role.setSelectedItem(Role.fromDatabase(String.valueOf(tableModel.getValueAt(row, 4))));
         Object[] fields = {"Nama", name, "Email", email, "No. Telepon", phone, "Role", role};
@@ -250,8 +263,15 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     }
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) { refreshUsers(); }
-    private void umkmButtonActionPerformed(java.awt.event.ActionEvent evt) { showMessage("Menu Kelola UMKM akan dihubungkan dengan modul rekan tim."); }
-    private void transactionsButtonActionPerformed(java.awt.event.ActionEvent evt) { showMessage("Menu Monitoring Transaksi akan dihubungkan dengan modul rekan tim."); }
+    private void umkmButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        new KelolaLayananFrame(admin).setVisible(true);
+    }
+    private void transactionsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        new LaporanAdminFrame(admin).setVisible(true);
+    }
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        new ProfilFrame(admin, this::refreshUsers).setVisible(true);
+    }
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
         dispose();
         new LoginFrame().setVisible(true);
@@ -276,6 +296,7 @@ public class AdminDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton profileButton;
     private javax.swing.JButton refreshButton;
     private javax.swing.JLabel subtitleLabel;
     private javax.swing.JScrollPane tableScrollPane;

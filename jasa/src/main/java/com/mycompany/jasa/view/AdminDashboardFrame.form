@@ -25,28 +25,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="titleLabel" min="-2" pref="1020" max="-2" attributes="0"/>
-          <Component id="subtitleLabel" min="-2" pref="1020" max="-2" attributes="0"/>
-          <Group type="102" attributes="0">
+          <Component id="titleLabel" alignment="0" max="32767" attributes="0"/>
+          <Component id="subtitleLabel" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="25" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="tableScrollPane" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="addButton" min="-2" pref="142" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="addButton" min="-2" pref="199" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="editButton" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" pref="105" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="refreshButton" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Component id="refreshButton" min="-2" pref="137" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="umkmButton" min="-2" pref="130" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="transactionsButton" min="-2" pref="165" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="profileButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="logoutButton" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="tableScrollPane" min="-2" pref="970" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,6 +67,7 @@
                   <Component id="refreshButton" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="umkmButton" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="transactionsButton" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="profileButton" min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="logoutButton" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
@@ -211,6 +215,24 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transactionsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="profileButton">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="f3" green="ee" red="e8" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="53" green="3d" red="27" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Profil"/>
+        <Property name="opaque" type="boolean" value="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="logoutButton">
