@@ -1,64 +1,123 @@
 package com.mycompany.jasa.view;
 
-import com.mycompany.jasa.controller.AuthController;
-import com.mycompany.jasa.controller.ControllerException;
-import com.mycompany.jasa.model.User;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
-public class LoginFrame extends JFrame {
 
-    private final AuthController authController = new AuthController();
-    private final JTextField emailField = new JTextField(22);
-    private final JPasswordField passwordField = new JPasswordField(22);
+public class LoginFrame extends javax.swing.JFrame {
+
 
     public LoginFrame() {
-        super("Login - JSBJ");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        JPanel form = new JPanel(new GridLayout(0, 1, 8, 8));
-        form.setBorder(BorderFactory.createEmptyBorder(24, 28, 16, 28));
-        form.add(new JLabel("Email"));
-        form.add(emailField);
-        form.add(new JLabel("Password"));
-        form.add(passwordField);
-
-        JButton loginButton = new JButton("Login");
-        JButton registerButton = new JButton("Daftar sebagai Pelanggan");
-        loginButton.addActionListener(event -> login());
-        registerButton.addActionListener(event -> {
-            dispose();
-            new RegisterFrame().setVisible(true);
-        });
-
-        JPanel actions = new JPanel();
-        actions.add(loginButton);
-        actions.add(registerButton);
-        add(new JLabel("Jasa Serba Bisa Jatinangor", JLabel.CENTER), BorderLayout.NORTH);
-        add(form, BorderLayout.CENTER);
-        add(actions, BorderLayout.SOUTH);
-        getRootPane().setDefaultButton(loginButton);
-        pack();
+        initComponents();
+        getContentPane().setBackground(new java.awt.Color(244, 247, 250));
         setLocationRelativeTo(null);
     }
 
-    private void login() {
-        char[] password = passwordField.getPassword();
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        titleLabel = new javax.swing.JLabel();
+        subtitleLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
+        registerButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login - JSBJ");
+        setResizable(false);
+
+        titleLabel.setBackground(new java.awt.Color(39, 61, 83));
+        titleLabel.setFont(new java.awt.Font("Georgia", 1, 30)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("JSBJ");
+        titleLabel.setOpaque(true);
+
+        subtitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        subtitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
+        subtitleLabel.setOpaque(true);
+        subtitleLabel.setText("Jasa Serba Bisa Jatinangor  ·  Masuk ke akunmu");
+        subtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(39, 50, 61));
+        emailLabel.setText("Email");
+
+        emailField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailField.setForeground(new java.awt.Color(39, 50, 61));
+
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(39, 50, 61));
+        passwordLabel.setText("Password");
+
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        passwordField.setForeground(new java.awt.Color(39, 50, 61));
+
+        loginButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setBackground(new java.awt.Color(54, 132, 142));
+        loginButton.setOpaque(true);
+        loginButton.setText("Login");
+        loginButton.addActionListener(this::loginButtonActionPerformed);
+
+        registerButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(39, 61, 83));
+        registerButton.setBackground(new java.awt.Color(232, 238, 243));
+        registerButton.setOpaque(true);
+        registerButton.setText("Daftar sebagai Pelanggan");
+        registerButton.addActionListener(this::registerButtonActionPerformed);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private final com.mycompany.jasa.controller.AuthController authController = new com.mycompany.jasa.controller.AuthController();
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        char[] rawPassword = passwordField.getPassword();
         try {
-            User user = authController.login(emailField.getText(), password);
+            com.mycompany.jasa.model.User user = authController.login(emailField.getText(), rawPassword);
             if (user == null) {
-                JOptionPane.showMessageDialog(this, "Email atau password tidak cocok.",
-                        "Login gagal", JOptionPane.WARNING_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "Email atau password tidak cocok.",
+                        "Login gagal", javax.swing.JOptionPane.WARNING_MESSAGE);
                 passwordField.setText("");
                 return;
             }
@@ -68,15 +127,27 @@ public class LoginFrame extends JFrame {
                 case PELANGGAN -> new PelangganDashboardFrame(user).setVisible(true);
                 case DRIVER -> new DriverDashboardFrame(user).setVisible(true);
             }
-        } catch (ControllerException exception) {
-            JOptionPane.showMessageDialog(this, "Login gagal: " + exception.getMessage(),
-                    "Kesalahan", JOptionPane.ERROR_MESSAGE);
+        } catch (com.mycompany.jasa.controller.ControllerException exception) {
+            javax.swing.JOptionPane.showMessageDialog(this, exception.getMessage(),
+                    "Login gagal", javax.swing.JOptionPane.ERROR_MESSAGE);
         } finally {
-            java.util.Arrays.fill(password, '\0');
+            java.util.Arrays.fill(rawPassword, '\0');
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+        new RegisterFrame().setVisible(true);
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField emailField;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JButton registerButton;
+    private javax.swing.JLabel subtitleLabel;
+    private javax.swing.JLabel titleLabel;
+    // End of variables declaration//GEN-END:variables
 }
