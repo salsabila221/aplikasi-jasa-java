@@ -2,72 +2,90 @@ package com.mycompany.jasa.controller;
 
 import com.mycompany.jasa.dao.LayananDAO;
 import com.mycompany.jasa.dao.UserDAO;
-import com.mycompany.jasa.model.LayananUmkm;
+import com.mycompany.jasa.model.Layanan;
 import com.mycompany.jasa.model.Role;
 import com.mycompany.jasa.model.User;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 
-/** Aturan katalog layanan dan hak admin untuk mengelolanya. */
+/** Controller katalog layanan. Pembacaan untuk pelanggan, CRUD khusus Admin. */
 public class LayananController {
-    public static final List<String> KATEGORI = List.of("Delivery Makanan", "Jastip Toko", "Kirim Barang");
+    public static final String[] KATEGORI = {"Delivery Makanan", "Jastip Toko", "Kirim Barang"};
+
     private final LayananDAO layananDAO;
     private final UserDAO userDAO;
 
-    public LayananController() { this(new LayananDAO(), new UserDAO()); }
-    LayananController(LayananDAO layananDAO, UserDAO userDAO) { this.layananDAO = layananDAO; this.userDAO = userDAO; }
+    public LayananController() {
+        this.layananDAO = new LayananDAO();
+        this.userDAO = new UserDAO();
+    }
 
-    public List<LayananUmkm> catalog(User actor) {
-        requireRole(actor, Role.PELANGGAN, Role.ADMIN);
+    public List<Layanan> getSemuaLayanan() {
         try { return layananDAO.findAll(); }
-        catch (SQLException ex) { throw ControllerSupport.databaseError("Memuat katalog layanan", ex); }
+        catch (SQLException ex) { throw databaseError("Memuat katalog", ex); }
     }
-    public List<LayananUmkm> manageList(User actor) {
-        requireRole(actor, Role.ADMIN);
-        try { return layananDAO.findAll(); }
-        catch (SQLException ex) { throw ControllerSupport.databaseError("Memuat katalog", ex); }
+
+    public List<Layanan> getLayananByKategori(String kategori) {
+        try { return layananDAO.findByCategory(kategori); }
+        catch (SQLException ex) { throw databaseError("Memfilter katalog", ex); }
     }
-    public LayananUmkm create(User actor, String nama, String kategori, String lokasi, double biaya) {
-        requireRole(actor, Role.ADMIN);
-        LayananUmkm row = validated(0, nama, kategori, lokasi, biaya);
-        try { return layananDAO.insert(row); }
-        catch (SQLException ex) { throw ControllerSupport.databaseError("Menambahkan layanan", ex); }
-    }
-    public void update(User actor, int id, String nama, String kategori, String lokasi, double biaya) {
-        requireRole(actor, Role.ADMIN);
-        LayananUmkm row = validated(id, nama, kategori, lokasi, biaya);
-        try { if (!layananDAO.update(row)) throw new ControllerException("Layanan tidak ditemukan."); }
-        catch (SQLException ex) { throw ControllerSupport.databaseError("Mengubah layanan", ex); }
-    }
-    public void delete(User actor, int id) {
-        requireRole(actor, Role.ADMIN);
+
+    public Layanan getById(int id) {
+        if (id <= 0) throw new ControllerException("Layanan tidak valid.");
         try {
-            if (!layananDAO.deleteIfUnused(id)) {
-                throw new ControllerException("Layanan sudah dipakai pesanan atau tidak ditemukan; data riwayat dijaga.");
+            Layanan item = layananDAO.findById(id);
+            if (item == null) throw new ControllerException("Layanan tidak ditemukan.");
+            return item;
+        } catch (SQLException ex) { throw databaseError("Memuat detail layanan", ex); }
+    }
+
+    public Layanan tambahLayanan(User actor, String nama, String kategori, String lokasi, double biaya) {
+        requireAdmin(actor);
+        Layanan item = validasi(0, nama, kategori, lokasi, biaya);
+        try { return layananDAO.insert(item); }
+        catch (SQLException ex) { throw databaseError("Menambahkan layanan", ex); }
+    }
+
+    public boolean ubahLayanan(User actor, int id, String nama, String kategori, String lokasi, double biaya) {
+        requireAdmin(actor);
+        if (id <= 0) throw new ControllerException("Pilih layanan yang akan diubah.");
+        Layanan item = validasi(id, nama, kategori, lokasi, biaya);
+        try {
+            if (!layananDAO.update(item)) throw new ControllerException("Layanan tidak ditemukan.");
+            return true;
+        } catch (SQLException ex) { throw databaseError("Mengubah layanan", ex); }
+    }
+
+    public boolean hapusLayanan(User actor, int id) {
+        requireAdmin(actor);
+        if (id <= 0) throw new ControllerException("Pilih layanan yang akan dihapus.");
+        try {
+            if (!layananDAO.delete(id)) {
+                throw new ControllerException("Layanan tidak ditemukan atau sudah memiliki riwayat pesanan.");
             }
-        } catch (SQLException ex) { throw ControllerSupport.databaseError("Menghapus layanan", ex); }
+            return true;
+        } catch (SQLException ex) { throw databaseError("Menghapus layanan", ex); }
     }
-    public LayananUmkm get(User actor, int id) {
-        requireRole(actor, Role.PELANGGAN, Role.ADMIN);
-        try {
-            LayananUmkm result = layananDAO.findById(id);
-            if (result == null) throw new ControllerException("Layanan tidak ditemukan.");
-            return result;
-        } catch (SQLException ex) { throw ControllerSupport.databaseError("Memuat layanan", ex); }
-    }
-    private LayananUmkm validated(int id, String nama, String kategori, String lokasi, double biaya) {
+
+    private Layanan validasi(int id, String nama, String kategori, String lokasi, double biaya) {
         if (nama == null || nama.isBlank()) throw new ControllerException("Nama layanan wajib diisi.");
-        if (!KATEGORI.contains(kategori)) throw new ControllerException("Pilih kategori layanan yang tersedia.");
+        if (kategori == null || !List.of(KATEGORI).contains(kategori)) throw new ControllerException("Kategori tidak valid.");
         if (lokasi == null || lokasi.isBlank()) throw new ControllerException("Lokasi asal wajib diisi.");
-        if (!Double.isFinite(biaya) || biaya < 0) throw new ControllerException("Tarif harus berupa angka nol atau lebih.");
-        return new LayananUmkm(id, nama.trim(), kategori, lokasi.trim(), biaya);
+        if (!Double.isFinite(biaya) || biaya < 0) throw new ControllerException("Biaya dasar tidak valid.");
+        return new Layanan(id, nama.trim(), kategori, lokasi.trim(), biaya);
     }
-    private void requireRole(User actor, Role... allowed) {
-        if (actor == null || actor.getIdUser() <= 0) throw new ControllerException("Silakan login kembali.");
+
+    private void requireAdmin(User actor) {
+        if (actor == null || actor.getIdUser() <= 0) throw new ControllerException("Sesi tidak valid.");
         try {
-            User fresh = userDAO.findById(actor.getIdUser());
-            if (fresh == null || !Set.of(allowed).contains(fresh.getRole())) throw new ControllerException("Role akun tidak memiliki akses ke fitur ini.");
-        } catch (SQLException ex) { throw ControllerSupport.databaseError("Memeriksa hak akses", ex); }
+            User current = userDAO.findById(actor.getIdUser());
+            if (current == null || current.getRole() != Role.ADMIN) {
+                throw new ControllerException("Fitur ini hanya dapat digunakan Admin.");
+            }
+        } catch (SQLException ex) { throw databaseError("Memeriksa hak akses", ex); }
+    }
+
+    private ControllerException databaseError(String action, SQLException ex) {
+        return new ControllerException(action + " gagal: " + ex.getMessage(), ex);
     }
 }

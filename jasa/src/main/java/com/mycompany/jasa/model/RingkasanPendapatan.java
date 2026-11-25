@@ -1,18 +1,30 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.jasa.model;
 
-/** Rekap jumlah dan nilai pesanan selesai untuk periode tertentu. */
+/**
+ *
+ * @author HP
+ */
 public class RingkasanPendapatan {
-    private String periode;
-    private int jumlahPesanan;
-    private double totalPendapatan;
+    private final int jumlahPesanan;
+    private final double totalPendapatan;
 
-    public RingkasanPendapatan(String periode, int jumlahPesanan, double totalPendapatan) {
-        this.periode = periode; this.jumlahPesanan = jumlahPesanan; this.totalPendapatan = totalPendapatan;
+    public RingkasanPendapatan(
+            int jumlahPesanan,
+            double totalPendapatan) {
+
+        this.jumlahPesanan = jumlahPesanan;
+        this.totalPendapatan = totalPendapatan;
     }
-    public String getPeriode() { return periode; }
-    public void setPeriode(String periode) { this.periode = periode; }
-    public int getJumlahPesanan() { return jumlahPesanan; }
-    public void setJumlahPesanan(int jumlahPesanan) { this.jumlahPesanan = jumlahPesanan; }
-    public double getTotalPendapatan() { return totalPendapatan; }
-    public void setTotalPendapatan(double totalPendapatan) { this.totalPendapatan = totalPendapatan; }
+
+    public int getJumlahPesanan() {
+        return jumlahPesanan;
+    }
+
+    public double getTotalPendapatan() {
+        return totalPendapatan;
+    }
 }
