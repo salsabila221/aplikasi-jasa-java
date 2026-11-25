@@ -1,46 +1,86 @@
 package com.mycompany.jasa.view;
 
-import com.mycompany.jasa.model.User;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-/** Dashboard sementara Pelanggan sampai modul dashboard utama siap. */
-public class PelangganDashboardFrame extends JFrame {
 
-    private final User user;
-    private final JLabel welcomeLabel = new JLabel();
+public class PelangganDashboardFrame extends javax.swing.JFrame {
 
-    public PelangganDashboardFrame(User user) {
-        super("Dashboard Pelanggan - JSBJ");
+
+    public PelangganDashboardFrame(com.mycompany.jasa.model.User user) {
+        initComponents();
         this.user = user;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout(12, 12));
-        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
+        getContentPane().setBackground(new java.awt.Color(244, 247, 250));
         refreshWelcome();
-        add(welcomeLabel, BorderLayout.CENTER);
-
-        JButton profileButton = new JButton("Buka Profil");
-        JButton logoutButton = new JButton("Logout");
-        profileButton.addActionListener(event -> new ProfilFrame(user, this::refreshWelcome).setVisible(true));
-        logoutButton.addActionListener(event -> logout());
-        JPanel actions = new JPanel(new FlowLayout());
-        actions.add(profileButton);
-        actions.add(logoutButton);
-        add(actions, BorderLayout.SOUTH);
-        setSize(460, 180);
         setLocationRelativeTo(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        titleLabel = new javax.swing.JLabel();
+        subtitleLabel = new javax.swing.JLabel();
+        welcomeLabel = new javax.swing.JLabel();
+        profileButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dashboard Pelanggan - JSBJ");
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        titleLabel.setFont(new java.awt.Font("Georgia", java.awt.Font.BOLD, 25));
+        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setBackground(new java.awt.Color(39, 61, 83));
+        titleLabel.setOpaque(true);
+        titleLabel.setText("Ruang Pelanggan");
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subtitleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+        subtitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
+        subtitleLabel.setOpaque(true);
+        subtitleLabel.setText("Temukan layanan lokal yang praktis di Jatinangor.");
+        subtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        welcomeLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+        welcomeLabel.setForeground(new java.awt.Color(39, 61, 83));
+        welcomeLabel.setText("Selamat datang");
+        welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        profileButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        profileButton.setForeground(new java.awt.Color(255, 255, 255));
+        profileButton.setBackground(new java.awt.Color(54, 132, 142));
+        profileButton.setOpaque(true);
+        profileButton.setText("Buka Profil");
+        logoutButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        logoutButton.setForeground(new java.awt.Color(39, 61, 83));
+        logoutButton.setBackground(new java.awt.Color(232, 238, 243));
+        logoutButton.setOpaque(true);
+        logoutButton.setText("Logout");
+        profileButton.addActionListener(this::profileButtonActionPerformed);
+        logoutButton.addActionListener(this::logoutButtonActionPerformed);
+        getContentPane().add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 66));
+        getContentPane().add(subtitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 520, 36));
+        getContentPane().add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 150, 440, 52));
+        getContentPane().add(profileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 225, 210, 42));
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 225, 210, 42));
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private final com.mycompany.jasa.model.User user;
+
+    private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        new ProfilFrame(user, () -> refreshWelcome()).setVisible(true);
+    }
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        dispose();
+        new LoginFrame().setVisible(true);
     }
 
     private void refreshWelcome() {
         welcomeLabel.setText("Selamat datang, " + user.getNama() + " (Pelanggan)");
     }
 
-    private void logout() {
-        dispose();
-        new LoginFrame().setVisible(true);
-    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel subtitleLabel;
+    private javax.swing.JLabel welcomeLabel;
+    private javax.swing.JButton profileButton;
+    private javax.swing.JButton logoutButton;
+    // End of variables declaration//GEN-END:variables
 }
