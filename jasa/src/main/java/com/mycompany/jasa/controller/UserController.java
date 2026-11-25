@@ -132,7 +132,8 @@ public class UserController {
             throw new ControllerException("Admin tidak dapat menghapus akunnya sendiri.");
         }
         try {
-            if (!userDAO.delete(userId)) throw new ControllerException("User tidak ditemukan.");
+            if (!userDAO.delete(userId)) throw new ControllerException(
+                    "User tidak ditemukan atau memiliki riwayat pesanan. Riwayat transaksi dipertahankan.");
         } catch (SQLException exception) {
             throw ControllerSupport.databaseError("Penghapusan user", exception);
         }

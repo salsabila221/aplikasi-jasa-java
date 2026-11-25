@@ -16,52 +16,98 @@ public class DriverDashboardFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         titleLabel = new javax.swing.JLabel();
         subtitleLabel = new javax.swing.JLabel();
         welcomeLabel = new javax.swing.JLabel();
+        ordersButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Driver - JSBJ");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        titleLabel.setFont(new java.awt.Font("Georgia", java.awt.Font.BOLD, 25));
+
+        titleLabel.setFont(new java.awt.Font("Georgia", 1, 25)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setBackground(new java.awt.Color(39, 61, 83));
         titleLabel.setOpaque(true);
         titleLabel.setText("Ruang Driver");
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        subtitleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+
+        subtitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         subtitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
         subtitleLabel.setOpaque(true);
         subtitleLabel.setText("Panel sederhana untuk akun pengemudi JSBJ.");
         subtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 20));
+
+        welcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(39, 61, 83));
-        welcomeLabel.setText("Selamat datang");
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        profileButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        welcomeLabel.setText("Selamat datang");
+
+        ordersButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ordersButton.setForeground(new java.awt.Color(255, 255, 255));
+        ordersButton.setBackground(new java.awt.Color(54, 132, 142));
+        ordersButton.setOpaque(true);
+        ordersButton.setText("Order Masuk, Progres Pengantaran & Penghasilan");
+        ordersButton.addActionListener(this::ordersButtonActionPerformed);
+
+        profileButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         profileButton.setForeground(new java.awt.Color(255, 255, 255));
         profileButton.setBackground(new java.awt.Color(54, 132, 142));
         profileButton.setOpaque(true);
         profileButton.setText("Buka Profil");
-        logoutButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13));
+        profileButton.addActionListener(this::profileButtonActionPerformed);
+
+        logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(39, 61, 83));
         logoutButton.setBackground(new java.awt.Color(232, 238, 243));
         logoutButton.setOpaque(true);
         logoutButton.setText("Logout");
-        profileButton.addActionListener(this::profileButtonActionPerformed);
         logoutButton.addActionListener(this::logoutButtonActionPerformed);
-        getContentPane().add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 66));
-        getContentPane().add(subtitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, 520, 36));
-        getContentPane().add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 150, 440, 52));
-        getContentPane().add(profileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 225, 210, 42));
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 225, 210, 42));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ordersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(subtitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(welcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addComponent(ordersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(profileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private final com.mycompany.jasa.model.User user;
+
+    private void ordersButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        new DriverOrdersFrame(user).setVisible(true);
+    }
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         new ProfilFrame(user, () -> refreshWelcome()).setVisible(true);
@@ -77,10 +123,11 @@ public class DriverDashboardFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel titleLabel;
-    private javax.swing.JLabel subtitleLabel;
-    private javax.swing.JLabel welcomeLabel;
-    private javax.swing.JButton profileButton;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JButton ordersButton;
+    private javax.swing.JButton profileButton;
+    private javax.swing.JLabel subtitleLabel;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

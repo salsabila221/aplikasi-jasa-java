@@ -40,10 +40,21 @@ CREATE TABLE IF NOT EXISTS `pesanan` (
     CONSTRAINT `fk_pesanan_user`
         FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE,
     CONSTRAINT `fk_pesanan_layanan`
-        FOREIGN KEY (`id_layanan`) REFERENCES `layanan_umkm` (`id_layanan`) ON DELETE CASCADE,
+        FOREIGN KEY (`id_layanan`) REFERENCES `layanan_umkm` (`id_layanan`) ON DELETE RESTRICT,
     CONSTRAINT `fk_pesanan_driver`
         FOREIGN KEY (`id_driver`) REFERENCES `users` (`id_user`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tarif contoh untuk demo awal; Admin dapat mengubah atau menambah layanan dari aplikasi.
+INSERT INTO `layanan_umkm` (`nama_layanan`, `kategori`, `lokasi_asal`, `biaya_dasar`)
+SELECT 'Antar Makanan Lokal', 'Delivery Makanan', 'Jatinangor', 5000
+WHERE NOT EXISTS (SELECT 1 FROM `layanan_umkm` WHERE `nama_layanan`='Antar Makanan Lokal');
+INSERT INTO `layanan_umkm` (`nama_layanan`, `kategori`, `lokasi_asal`, `biaya_dasar`)
+SELECT 'Jastip Toko', 'Jastip Toko', 'Jatinangor', 8000
+WHERE NOT EXISTS (SELECT 1 FROM `layanan_umkm` WHERE `nama_layanan`='Jastip Toko');
+INSERT INTO `layanan_umkm` (`nama_layanan`, `kategori`, `lokasi_asal`, `biaya_dasar`)
+SELECT 'Kirim Barang Lokal', 'Kirim Barang', 'Jatinangor', 10000
+WHERE NOT EXISTS (SELECT 1 FROM `layanan_umkm` WHERE `nama_layanan`='Kirim Barang Lokal');
 
 -- Akun Admin awal. Password memakai format PBKDF2 yang diverifikasi AuthController.
 INSERT INTO `users` (`nama`, `email`, `password`, `no_telepon`, `role`)

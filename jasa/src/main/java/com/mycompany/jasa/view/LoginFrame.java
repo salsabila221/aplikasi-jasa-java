@@ -35,12 +35,12 @@ public class LoginFrame extends javax.swing.JFrame {
         titleLabel.setText("JSBJ");
         titleLabel.setOpaque(true);
 
+        subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
         subtitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         subtitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        subtitleLabel.setBackground(new java.awt.Color(39, 61, 83));
-        subtitleLabel.setOpaque(true);
-        subtitleLabel.setText("Jasa Serba Bisa Jatinangor  ·  Masuk ke akunmu");
         subtitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        subtitleLabel.setText("Jasa Serba Bisa Jatinangor  ·  Masuk ke akunmu");
+        subtitleLabel.setOpaque(true);
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         emailLabel.setForeground(new java.awt.Color(39, 50, 61));
@@ -56,18 +56,18 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         passwordField.setForeground(new java.awt.Color(39, 50, 61));
 
+        loginButton.setBackground(new java.awt.Color(54, 132, 142));
         loginButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
-        loginButton.setBackground(new java.awt.Color(54, 132, 142));
-        loginButton.setOpaque(true);
         loginButton.setText("Login");
+        loginButton.setOpaque(true);
         loginButton.addActionListener(this::loginButtonActionPerformed);
 
+        registerButton.setBackground(new java.awt.Color(232, 238, 243));
         registerButton.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         registerButton.setForeground(new java.awt.Color(39, 61, 83));
-        registerButton.setBackground(new java.awt.Color(232, 238, 243));
-        registerButton.setOpaque(true);
         registerButton.setText("Daftar sebagai Pelanggan");
+        registerButton.setOpaque(true);
         registerButton.addActionListener(this::registerButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,7 +103,8 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();

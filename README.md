@@ -11,12 +11,14 @@ Aplikasi desktop Java Swing untuk mendukung layanan kurir lokal dan jasa titip (
 
 ## Alur dan pembagian fitur
 
-1. Pengguna dapat membuat akun sendiri sebagai **Pelanggan** melalui form registrasi.
+1. Pengguna dapat membuat akun sendiri sebagai **Pelanggan** melalui form registrasi; nomor telepon/WhatsApp wajib diisi.
 2. Pelanggan, Driver, dan Admin masuk melalui form login yang sama. Setelah login, aplikasi mengarahkan pengguna ke dashboard sesuai role.
-3. Pelanggan dapat melihat dan mengubah profil, melihat katalog UMKM, membuat pesanan, dan memantau riwayat serta status pesanan.
-4. Driver dapat melihat pesanan berstatus `Pending`, mengambil pesanan, memperbarui status pengantaran, dan melihat riwayat serta penghasilan.
+3. Semua role dapat melihat dan mengubah profil sendiri serta mengganti password. Pelanggan dapat memfilter katalog berdasarkan Delivery Makanan, Jastip Toko, dan Kirim Barang, membuat pesanan, lalu memantau status serta riwayat pesanan.
+4. Driver dapat melihat pesanan berstatus `Pending`, mengambil pesanan secara aman agar tidak direbut driver lain, memperbarui status `Diproses` → `Diantar` → `Selesai`, serta melihat riwayat dan total tarif pesanan selesai.
 5. Admin mengelola pengguna dan membuat akun Driver maupun Admin. Registrasi publik hanya membuat akun Pelanggan.
-6. Admin mengelola katalog layanan/UMKM, memantau transaksi, dan melihat laporan.
+6. Admin mengelola katalog layanan/UMKM, memantau transaksi, dan melihat rekap pendapatan harian/bulanan untuk pesanan selesai.
+
+Tarif pesanan saat ini memakai nilai `biaya_dasar` dari layanan yang dipilih. Skema belum menyimpan jarak atau persentase komisi driver; karena itu nilai penghasilan driver dan rekap Admin dihitung dari total tarif pesanan berstatus `Selesai`.
 
 Salsabila mengerjakan fitur autentikasi, profil, serta manajemen pengguna. Jilan mengerjakan dashboard pelanggan/driver, katalog layanan, pesanan, tracking, dan laporan. Dashboard Admin menjadi titik temu kedua bagian.
 
@@ -24,7 +26,7 @@ Salsabila mengerjakan fitur autentikasi, profil, serta manajemen pengguna. Jilan
 
 Project Maven berada di folder `jasa/`. Source Java berada di `jasa/src/main/java/com/mycompany/jasa/` dan mengikuti pemisahan MVC:
 
-- `model`: objek domain (`User`, `Role`, dan `UserCredential`) berisi data serta accessor.
+- `model`: objek domain (`User`, `Role`, `UserCredential`, `LayananUmkm`, `Pesanan`, dan `RingkasanPendapatan`) berisi data serta accessor.
 - `view`: form dan dashboard Swing; menangani tampilan, input, event, dan pesan kepada pengguna.
 - `controller`: validasi input, aturan role/hak akses, alur autentikasi, registrasi, profil, dan manajemen akun.
 - `dao`: query JDBC untuk membaca dan mengubah data database, tanpa aturan UI.
@@ -38,13 +40,13 @@ Skema database tunggal yang dipakai aplikasi adalah:
 - `layanan_umkm`: katalog jasa dan mitra UMKM.
 - `pesanan`: transaksi, dengan `id_driver` opsional yang merujuk ke `users.id_user`.
 
-DAO yang ada saat ini memakai `users`. Belum ada DAO layanan/pesanan atau file SQL lain di project; method dan query akun yang tidak dipakai sudah dibersihkan. Script schema lengkap, termasuk penghapusan alias lama `pengguna`, `layanan`, dan `orders` serta Admin awal, ada di [jasa/schema.sql](jasa/schema.sql).
+DAO menggunakan tabel utama `users`, `layanan_umkm`, dan `pesanan`. Script schema lengkap, termasuk penghapusan alias lama `pengguna`, `layanan`, dan `orders`, layanan contoh untuk demo, serta Admin awal, ada di [jasa/schema.sql](jasa/schema.sql).
 
 ## Menyiapkan database
 
 Pilih database hosting JSBJ di HeidiSQL, lalu jalankan isi `jasa/schema.sql`. Script tidak membuat atau memilih database. Script menghapus tabel alias lama jika ada, kemudian membuat tiga tabel standar dengan role `Pelanggan`, `Driver`, `Admin` dan kolom `id_driver`.
 
-Perintah `DROP TABLE` di script hanya ditujukan untuk alias lama (`pengguna`, `layanan`, `orders`). Jalankan pada database khusus proyek ini dan ekspor data alias terlebih dahulu jika masih diperlukan.
+Script menambahkan tiga layanan contoh hanya jika belum ada. Untuk database cloud yang tabelnya sudah dibuat, jalankan [jasa/seed-layanan.sql](jasa/seed-layanan.sql) agar katalog demo terisi tanpa menghapus tabel apa pun. Tarif contoh dapat diedit Admin. Perintah `DROP TABLE` di `schema.sql` hanya ditujukan untuk alias lama (`pengguna`, `layanan`, `orders`). Jalankan script schema pada database khusus proyek ini dan ekspor data alias terlebih dahulu jika masih diperlukan.
 
 Akun Admin awal:
 
